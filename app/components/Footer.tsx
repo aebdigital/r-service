@@ -32,7 +32,12 @@ export function Footer() {
             </div>
           </div>
         </div>
-        <div className="copyright">© 2024 R-SERVICE. Všetky práva vyhradené.</div>
+        <div className="copyright">
+          <span>© 2026 R-SERVICE. Všetky práva vyhradené.</span>
+          <a href="https://aebdigital.sk" target="_blank" rel="noreferrer">
+            Tvorba webu - AEB Digital
+          </a>
+        </div>
       </div>
     </footer>
   );
