@@ -23,3 +23,9 @@ pnpm-debug.log*
 
 # typescript
 *.tsbuildinfo
+
+# missing legacy theme files returned by the old server as 404 HTML
+public/legacy/bg_img.jpg
+public/legacy/bot.png
+public/legacy/right_bg.gif
+public/legacy/top.png

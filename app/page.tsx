@@ -1,47 +1,17 @@
 "use client";
 
+import Link from "next/link";
 import type { CSSProperties, FormEvent } from "react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { Footer } from "./components/Footer";
+import { RevealObserver } from "./components/RevealObserver";
+import { SiteHeader } from "./components/SiteHeader";
+import { contact, servicePages } from "./content";
 
 type CSSVars = CSSProperties & Record<`--${string}`, string>;
 
 const delay = (ms: number): CSSVars => ({ "--delay": `${ms}ms` });
 const progressValue = (value: string): CSSVars => ({ "--value": value });
-
-const navItems = [
-  { href: "#home", label: "Domov" },
-  { href: "#services", label: "Autoservis" },
-  { href: "#about", label: "Pneuservis" },
-  { href: "#projects", label: "Pneumatiky" },
-  { href: "#contact", label: "Kontakt" },
-];
-
-const services = [
-  {
-    title: "Autoservis a opravy",
-    text: "Mechanické opravy, výmena rozvodu, generálka motora, opravy brzdovej sústavy a zavesenia.",
-    image: "/service1.jpg",
-    delay: 80,
-  },
-  {
-    title: "Diagnostika a elektrika",
-    text: "Komplexná diagnostika motorov, bezpečnostných systémov, klimatizácie a oprava autoelektriky.",
-    image: "/service2.jpg",
-    delay: 160,
-  },
-  {
-    title: "Pneuservis a pneumatiky",
-    text: "Predaj a servis pneumatík pre osobné autá, SUV a off-road. Výmena a skladovanie.",
-    image: "/service3.jpg",
-    delay: 240,
-  },
-  {
-    title: "Náhradné diely a oleje",
-    text: "Rýchle dodanie dielov do 24 hodín. Široký výber olejov TOTAL, CASTROL a originálnych značiek.",
-    isRed: true,
-    delay: 320,
-  },
-];
 
 const stats = [
   { value: "20+", label: "Rokov skúseností" },
@@ -94,12 +64,6 @@ const projects = [
   },
 ];
 
-const faqs = [
-  "Vykonávame záručné prehliadky pre nové vozidlá?",
-  "Máte k dispozícii pneumatiky pre off-road?",
-  "Aká je dodacia lehota pre náhradné diely?",
-];
-
 const features = [
   {
     title: "Otváracie hodiny",
@@ -108,7 +72,7 @@ const features = [
   },
   {
     title: "Kontakt",
-    text: "Tel: 0915 832 193, 0918 936 002",
+    text: `Tel: ${contact.phones.join(", ")}`,
     delay: 320,
   },
 ];
@@ -136,43 +100,6 @@ function phoneIcon() {
 }
 
 export default function Home() {
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  useEffect(() => {
-    document.body.classList.toggle("is-locked", menuOpen);
-
-    return () => {
-      document.body.classList.remove("is-locked");
-    };
-  }, [menuOpen]);
-
-  useEffect(() => {
-    const elements = Array.from(document.querySelectorAll<HTMLElement>(".reveal"));
-
-    if (!("IntersectionObserver" in window)) {
-      elements.forEach((element) => element.classList.add("is-visible"));
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
-    );
-
-    elements.forEach((element) => observer.observe(element));
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
-
   useEffect(() => {
     let scrollMarks = [25, 50, 75, 100];
     const timers = [
@@ -204,40 +131,14 @@ export default function Home() {
     };
   }, []);
 
-  const closeMenu = () => setMenuOpen(false);
-
   const submitQuote = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
   };
 
   return (
     <>
-      <header className="site-header">
-        <nav className="nav section-inner" aria-label="Hlavná navigácia">
-          <a className="brand" href="#home" aria-label="R-SERVICE domov" onClick={closeMenu}>
-            <span className="brand-mark" aria-hidden="true" />
-            <span>R-SERVICE</span>
-          </a>
-          <div className={`nav-links${menuOpen ? " is-open" : ""}`} id="navLinks">
-            {navItems.map((item) => (
-              <a key={item.href} href={item.href} onClick={closeMenu}>
-                {item.label}
-              </a>
-            ))}
-          </div>
-          <a className="nav-cta" href="#contact">
-            Zavolajte nám
-          </a>
-          <button
-            className={`menu-toggle${menuOpen ? " is-open" : ""}`}
-            id="menuToggle"
-            type="button"
-            aria-label="Otvoriť menu"
-            aria-expanded={menuOpen}
-            onClick={() => setMenuOpen((open) => !open)}
-          />
-        </nav>
-      </header>
+      <SiteHeader />
+      <RevealObserver />
 
       <main>
         <section className="hero" id="home" aria-label="Úvod">
@@ -255,12 +156,12 @@ export default function Home() {
                 diagnostika, pneumatiky a náhradné diely s rýchlym dodaním.
               </p>
               <div className="hero-actions reveal" style={delay(240)}>
-                <a className="btn btn-primary" href="#contact">
+                <Link className="btn btn-primary" href="/kontakt">
                   Objednať sa na servis
-                </a>
-                <a className="btn btn-light" href="#services">
+                </Link>
+                <Link className="btn btn-light" href="/sluzby/autoservis">
                   Zistiť viac
-                </a>
+                </Link>
               </div>
             </div>
             <div className="hero-stats reveal" style={delay(320)} aria-label="Prehľad servisu">
@@ -284,24 +185,23 @@ export default function Home() {
                 Komplexná starostlivosť o vozidlo
               </h2>
               <p className="lead reveal" style={delay(160)}>
-                Vykonávame mechanické práce, diagnostiku, výmenu olejov a prípravu na
-                STK. Ponúkame aj predaj pneumatík a alu diskov.
+                Päť hlavných služieb z pôvodného webu sme rozšírili do samostatných stránok
+                s kompletným textom a obrázkami.
               </p>
             </div>
 
-            <div className="service-grid">
-              {services.map((service) => (
-                <article
-                  key={service.title}
-                  className={`service-card reveal${service.isRed ? " is-red" : ""}`}
-                  style={delay(service.delay)}
+            <div className="service-grid is-five">
+              {servicePages.map((service, index) => (
+                <Link
+                  key={service.slug}
+                  className={`service-card reveal${service.slug === "nahradne-diely" ? " is-red" : ""}`}
+                  href={service.href}
+                  style={delay((index + 1) * 70)}
                 >
-                  {service.image ? (
-                    <img className="service-bg-img" src={service.image} alt={service.title} />
-                  ) : null}
+                  <img className="service-bg-img" src={service.cardImage} alt={service.title} />
                   <h3>{service.title}</h3>
-                  <p>{service.text}</p>
-                </article>
+                  <p>{service.summary}</p>
+                </Link>
               ))}
             </div>
           </div>
@@ -311,10 +211,10 @@ export default function Home() {
           <div className="section-inner split">
             <div className="about-art reveal">
               <div className="about-main-img">
-                <img src="/aboutMain.jpg" alt="R-SERVICE: Odbornosť a dôvera" />
+                <img src="/legacy/o_firme.jpg" alt="R-SERVICE: Odbornosť a dôvera" />
               </div>
               <div className="about-small-img">
-                <img src="/aboutSmall.jpg" alt="R-SERVICE: Odbornosť a dôvera" />
+                <img src="/legacy/servisak.jpg" alt="R-SERVICE: Odbornosť a dôvera" />
               </div>
             </div>
             <div className="about-copy">
@@ -326,17 +226,17 @@ export default function Home() {
                 Kvalita za rozumnú cenu
               </p>
               <p className="lead reveal" style={delay(220)}>
-                Firma vznikla v roku 2003 s cieľom ponúknuť motoristom spoľahlivý servis.
-                Neustále sa vzdelávame, aby sme reagovali na inovácie v automobilovom trhu.
+                Firma vznikla v roku 2003. Venujeme sa službám pre motoristov a kladieme
+                dôraz na vysokú odbornosť, osobitý prístup a neustále vzdelávanie tímu.
               </p>
               <ul className="check-list reveal" style={delay(300)}>
                 <li>Servisné a záručné prehliadky pre nové vozidlá</li>
                 <li>Vysoká odbornosť a osobitý prístup</li>
                 <li>Rýchle dodanie náhradných dielov</li>
               </ul>
-              <a className="btn btn-primary reveal" style={delay(380)} href="#contact">
-                Kontaktujte nás
-              </a>
+              <Link className="btn btn-primary reveal" style={delay(380)} href="/profil-firmy">
+                Profil firmy
+              </Link>
             </div>
           </div>
         </section>
@@ -378,8 +278,8 @@ export default function Home() {
                 Dôvera zákazníkov
               </h2>
               <p className="lead reveal" style={delay(160)}>
-                Nechceme byť najlacnejší, ale preferujeme kvalitu, ktorá vám ušetrí čas a
-                peniaze v dlhodobom horizonte.
+                Nechceme byť najlacnejší a za každú cenu predať, ale preferujeme kvalitu,
+                ktorá vám ušetrí čas a peniaze v dlhodobom horizonte.
               </p>
               <div className="progress-list reveal" style={delay(240)}>
                 {progressRows.map((row) => (
@@ -401,7 +301,7 @@ export default function Home() {
                 </span>
                 <div>
                   <span>Nonstop linka</span>
-                  <strong>0915 832 193</strong>
+                  <strong>{contact.phones[0]}</strong>
                 </div>
               </div>
             </div>
@@ -436,26 +336,27 @@ export default function Home() {
               <p className="kicker">Špecializácie</p>
               <h2>Čo ponúkame</h2>
               <p className="lead">
-                Predajca pneumatík VRANÍK s výhodnými rabatmi. Široký sortiment
-                náhradných dielov a olejov.
+                Predaj pneumatík VRANÍK s výhodnými rabatmi, široký sortiment
+                náhradných dielov a olejov, certifikovaná montáž ťažných zariadení a
+                strešných nosičov.
               </p>
               <div className="faq-list">
-                {faqs.map((faq) => (
-                  <div className="faq-item" key={faq}>
-                    <span>{faq}</span>
+                {servicePages.map((service) => (
+                  <Link className="faq-item" href={service.href} key={service.slug}>
+                    <span>{service.title}</span>
                     <span>→</span>
-                  </div>
+                  </Link>
                 ))}
               </div>
             </div>
             <div className="reveal" style={delay(120)}>
               <div className="rating-card">
                 <div className="stars">★★★★★</div>
-                <strong>★★★★★</strong>
+                <strong>Shell partner</strong>
               </div>
 
               <div className="capability-image" role="img" aria-label="Čo ponúkame">
-                <img src="/capabilityBg.jpg" alt="Čo ponúkame" />
+                <img src="/legacy/r-service-final.png" alt="R-SERVICE" />
               </div>
             </div>
           </div>
@@ -488,7 +389,7 @@ export default function Home() {
           <div className="contact-dark">
             <p className="kicker reveal">Otváracie hodiny</p>
             <h2 className="reveal" style={delay(80)}>
-              Navštívte nás v Veľkom Krtíši
+              Navštívte nás vo Veľkom Krtíši
             </h2>
             <p className="lead reveal" style={delay(160)}>
               Tešíme sa na vašu návštevu. Ponúkame výhodné rabaty pri nákupe pneumatík.
@@ -509,64 +410,17 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="testimonials">
-          <div className="section-inner">
-            <div className="section-heading">
-              <p className="kicker reveal">Referencie</p>
-              <h2 className="reveal" style={delay(80)}>
-                Čo hovoria zákazníci
-              </h2>
-            </div>
-            <div className="testimonial-grid" />
-          </div>
-        </section>
-
         <section className="cta-band">
           <div className="cta-inner">
             <h2>Potrebujete servis?</h2>
-            <a className="btn btn-light" href="#contact">
+            <Link className="btn btn-light" href="/kontakt">
               Zavolajte nám
-            </a>
+            </Link>
           </div>
         </section>
       </main>
 
-      <footer className="footer">
-        <div className="section-inner">
-          <div className="footer-grid">
-            <div>
-              <a className="brand" href="#home">
-                <span className="brand-mark" aria-hidden="true" />
-                <span>R-SERVICE</span>
-              </a>
-              <p>Autoservis a pneuservis s dôrazom na kvalitu a rýchlosť.</p>
-            </div>
-            <div>
-              <h3>Menu</h3>
-              <div className="footer-links">
-                {navItems.slice(1).map((item) => (
-                  <a key={item.href} href={item.href}>
-                    {item.label}
-                  </a>
-                ))}
-              </div>
-            </div>
-            <div>
-              <h3>Kontakt</h3>
-              <div className="footer-contact">
-                <span>Písecká 3, 990 01 Veľký Krtíš</span>
-                <a href="mailto:r-service@azet.sk" onClick={() => track("EmailClick")}>
-                  r-service@azet.sk
-                </a>
-                <a href="tel:0915 832 193" onClick={() => track("PhoneClick")}>
-                  0915 832 193
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="copyright">© 2024 R-SERVICE. Všetky práva vyhradené.</div>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }
