@@ -1,0 +1,1899 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>if(window.location.protocol!=='file:'){document.write('<base href="/r.service.sk/">')}</script>
+  <title>R-SERVICE: Autoservis a Pneuservis Veľký Krtíš</title>
+  <meta name="description" content="Komplexný autoservis a pneuservis s dôrazom na kvalitu. Opravy, diagnostika, pneumatiky a náhradné diely s rýchlym dodaním." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --red: #d8261c;
+      --red-dark: #b51e16;
+      --black: #171717;
+      --ink: #24252b;
+      --muted: #6d717c;
+      --line: #e8e8ea;
+      --soft: #f6f7f9;
+      --white: #ffffff;
+      --shadow: 0 24px 80px rgba(16, 17, 20, 0.13);
+      --radius: 8px;
+      --max: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--white);
+      font-family: "Outfit", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+      overflow-x: hidden;
+    }
+
+    body.is-locked {
+      overflow: hidden;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    .section-inner {
+      width: min(calc(100% - 40px), var(--max));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 8px 34px rgba(0, 0, 0, 0.08);
+      backdrop-filter: blur(16px);
+    }
+
+    .nav {
+      min-height: 86px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      min-width: max-content;
+      font-size: 1.56rem;
+      font-weight: 850;
+      letter-spacing: 0;
+      color: var(--black);
+    }
+
+    .brand-mark {
+      width: 44px;
+      height: 34px;
+      border-radius: 999px;
+      position: relative;
+      background: var(--red);
+      transform: skewX(-12deg);
+      box-shadow: inset -8px 0 0 rgba(0, 0, 0, 0.12);
+    }
+
+    .brand-mark::before,
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+    }
+
+    .brand-mark::before {
+      width: 18px;
+      height: 18px;
+      left: 9px;
+      top: 8px;
+      border: 3px solid var(--white);
+      box-shadow: inset 0 0 0 3px var(--red);
+      background: var(--white);
+    }
+
+    .brand-mark::after {
+      width: 22px;
+      height: 3px;
+      right: 5px;
+      top: 16px;
+      background: var(--white);
+      border-radius: 999px;
+      transform: rotate(-18deg);
+    }
+
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 32px;
+      font-size: 0.88rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--black);
+    }
+
+    .nav-links a {
+      position: relative;
+      padding: 30px 0;
+      transition: color 180ms ease;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 24px;
+      height: 2px;
+      background: var(--red);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 180ms ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--red);
+    }
+
+    .nav-links a:hover::after {
+      transform: scaleX(1);
+    }
+
+    .nav-cta,
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 54px;
+      padding: 0 24px;
+      border: 0;
+      border-radius: 0;
+      font-weight: 850;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform 180ms ease, background 180ms ease, color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .nav-cta,
+    .btn-primary {
+      color: var(--white);
+      background: var(--red);
+      box-shadow: 0 16px 36px rgba(216, 38, 28, 0.24);
+    }
+
+    .nav-cta:hover,
+    .btn-primary:hover {
+      background: var(--red-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 20px 46px rgba(216, 38, 28, 0.3);
+    }
+
+    .btn-dark {
+      color: var(--white);
+      background: var(--black);
+    }
+
+    .btn-dark:hover {
+      background: #000000;
+      transform: translateY(-2px);
+    }
+
+    .btn-light {
+      color: var(--red);
+      background: var(--white);
+    }
+
+    .btn-light:hover {
+      color: var(--black);
+      transform: translateY(-2px);
+    }
+
+    .menu-toggle {
+      display: none;
+      width: 46px;
+      height: 46px;
+      justify-self: end;
+      border: 0;
+      border-radius: 0;
+      background: var(--black);
+      color: var(--white);
+      cursor: pointer;
+      position: relative;
+    }
+
+    .menu-toggle::before,
+    .menu-toggle::after {
+      content: "";
+      position: absolute;
+      left: 13px;
+      right: 13px;
+      height: 2px;
+      background: currentColor;
+      transition: transform 180ms ease, top 180ms ease;
+    }
+
+    .menu-toggle::before {
+      top: 16px;
+    }
+
+    .menu-toggle::after {
+      top: 28px;
+    }
+
+    .menu-toggle.is-open::before {
+      top: 23px;
+      transform: rotate(45deg);
+    }
+
+    .menu-toggle.is-open::after {
+      top: 23px;
+      transform: rotate(-45deg);
+    }
+
+    .hero {
+      min-height: 100vh;
+      padding-top: 86px;
+      position: relative;
+      display: grid;
+      align-items: stretch;
+      overflow: hidden;
+      color: var(--white);
+      background: var(--black);
+    }
+
+    .hero-media,
+    .hero-media img,
+    .hero::before,
+    .hero::after {
+      position: absolute;
+      inset: 0;
+    }
+
+    .hero-media {
+      z-index: 0;
+    }
+
+    .hero-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 57% center;
+      filter: saturate(0.9) contrast(1.08);
+      transform: scale(1.04);
+      animation: heroDrift 18s ease-in-out infinite alternate;
+    }
+
+    .hero::before {
+      content: "";
+      z-index: 1;
+      background:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.86), rgba(0, 0, 0, 0.53) 42%, rgba(0, 0, 0, 0.16) 72%),
+        linear-gradient(180deg, rgba(0, 0, 0, 0.26), rgba(0, 0, 0, 0.72));
+    }
+
+    .hero::after {
+      content: "";
+      z-index: 2;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 4% 88%, rgba(216, 38, 28, 0.22), transparent 24%),
+        repeating-linear-gradient(135deg, transparent 0 18px, rgba(255, 255, 255, 0.035) 18px 19px);
+      mask-image: linear-gradient(90deg, #000 0 42%, transparent 70%);
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 3;
+      min-height: calc(100vh - 86px);
+      padding: 106px 0 54px;
+      display: grid;
+      grid-template-columns: minmax(0, 0.72fr) minmax(300px, 0.42fr);
+      gap: 38px;
+      align-items: end;
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 18px;
+      color: var(--red);
+      font-size: 0.86rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .kicker::before {
+      content: "";
+      width: 30px;
+      height: 3px;
+      background: currentColor;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      max-width: 680px;
+      margin-bottom: 28px;
+      font-size: clamp(2.65rem, 5.8vw, 5.45rem);
+      line-height: 1.02;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
+    .hero-copy {
+      max-width: 590px;
+      margin-bottom: 34px;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 1.08rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .hero-stats {
+      align-self: end;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .hero-stat {
+      min-height: 148px;
+      padding: 28px;
+      display: grid;
+      align-content: center;
+      gap: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(15px);
+    }
+
+    .hero-stat strong {
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1;
+      font-weight: 900;
+    }
+
+    .hero-stat span {
+      color: rgba(255, 255, 255, 0.76);
+      font-size: 0.95rem;
+    }
+
+    section {
+      position: relative;
+    }
+
+    .services {
+      padding: 116px 0 100px;
+      background:
+        radial-gradient(circle at 0 20%, rgba(23, 23, 23, 0.06), transparent 16%),
+        linear-gradient(180deg, var(--white), var(--white));
+      overflow: hidden;
+    }
+
+    .section-heading {
+      max-width: 760px;
+      margin: 0 auto 54px;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 18px;
+      color: var(--ink);
+      font-size: clamp(2.55rem, 5vw, 4.75rem);
+      line-height: 1.06;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: 1.07rem;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .service-card {
+      min-height: 330px;
+      position: relative;
+      display: grid;
+      align-content: end;
+      padding: 26px;
+      overflow: hidden;
+      color: var(--white);
+      background: var(--black);
+      box-shadow: var(--shadow);
+    }
+
+    .service-card::before {
+      display: none;
+    }
+
+    .service-bg-img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; opacity: 0.72; transform: scale(1.04);
+      transition: transform 700ms ease, opacity 700ms ease; z-index: 0;
+    }
+
+    .service-card:hover .service-bg-img { opacity: 0.88; transform: scale(1.11); }
+
+    .service-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.74)),
+        linear-gradient(135deg, rgba(216, 38, 28, 0.24), transparent 58%);
+    }
+
+    .service-card.is-red {
+      background: var(--red);
+    }
+
+    .service-card.is-red::after {
+      background:
+        repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0 1px, transparent 1px 12px),
+        linear-gradient(135deg, rgba(0, 0, 0, 0.08), transparent);
+    }
+
+    .service-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .mini-icon {
+      width: 72px;
+      height: 72px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 26px;
+      color: var(--white);
+      background: var(--red);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    .service-card h3 {
+      margin-bottom: 12px;
+      color: var(--white);
+      font-size: 1.55rem;
+      line-height: 1.1;
+      font-weight: 850;
+    }
+
+    .service-card p {
+      margin-bottom: 0;
+      color: rgba(255, 255, 255, 0.78);
+    }
+
+    .about {
+      padding: 118px 0 80px;
+      background: var(--white);
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: minmax(0, 0.88fr) minmax(0, 1fr);
+      gap: 78px;
+      align-items: center;
+    }
+
+    .about-art {
+      min-height: 600px;
+      position: relative;
+      isolation: isolate;
+    }
+
+    .about-art::before {
+      content: "";
+      position: absolute;
+      top: -44px;
+      right: 40px;
+      width: 220px;
+      height: 250px;
+      border: 8px solid var(--red);
+      z-index: -1;
+    }
+
+    .about-main-img,
+    .about-small-img {
+      position: absolute;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .about-main-img {
+      inset: 0 160px 70px 0;
+    }
+
+    .about-small-img {
+      right: 0;
+      bottom: 0;
+      width: 52%;
+      height: 54%;
+      border: 12px solid var(--white);
+    }
+
+    .about-main-img img,
+    .about-small-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .about-copy .kicker,
+    .why-copy .kicker,
+    .capabilities .kicker,
+    .contact-dark .kicker,
+    .testimonials .kicker,
+    .projects .kicker {
+      margin-bottom: 14px;
+    }
+
+    .about-copy .kicker::before,
+    .why-copy .kicker::before,
+    .capabilities .kicker::before,
+    .contact-dark .kicker::before,
+    .testimonials .kicker::before,
+    .projects .kicker::before {
+      width: 0;
+      height: 0;
+    }
+
+    .accent-line {
+      margin: 28px 0 24px;
+      color: var(--red);
+      font-size: 1.28rem;
+      line-height: 1.45;
+      font-weight: 800;
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 5px;
+    }
+
+    .check-list {
+      display: grid;
+      gap: 13px;
+      margin: 28px 0 34px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .check-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .check-list li::before {
+      content: "›";
+      width: 24px;
+      height: 24px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 24px;
+      color: var(--white);
+      background: var(--red);
+      border-radius: 50%;
+      font-size: 1.1rem;
+      font-weight: 900;
+    }
+
+    .stats {
+      padding: 70px 0 92px;
+      background:
+        linear-gradient(180deg, rgba(246, 247, 249, 0.92), rgba(246, 247, 249, 0.92));
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 28px;
+    }
+
+    .stat-card {
+      min-height: 178px;
+      padding: 34px 24px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      border: 3px solid rgba(23, 23, 23, 0.08);
+      background: rgba(255, 255, 255, 0.48);
+    }
+
+    .stat-card strong {
+      display: block;
+      color: var(--ink);
+      font-size: clamp(2.4rem, 5vw, 3.9rem);
+      line-height: 1;
+      font-weight: 900;
+    }
+
+    .stat-card span {
+      color: var(--muted);
+      font-weight: 650;
+    }
+
+    .diagnostic {
+      padding: 0 0 112px;
+      background: var(--white);
+    }
+
+    .diagnostic-grid {
+      display: grid;
+      grid-template-columns: minmax(300px, 0.78fr) minmax(0, 1fr);
+      gap: 72px;
+      align-items: stretch;
+    }
+
+    .diagnostic-panel {
+      padding: clamp(34px, 5vw, 66px);
+      color: var(--white);
+      background:
+        repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.09) 0 1px, transparent 1px 14px),
+        linear-gradient(135deg, var(--red), var(--red-dark));
+    }
+
+    .diagnostic-panel h2 {
+      color: var(--white);
+      font-size: clamp(2.2rem, 4vw, 4.1rem);
+    }
+
+    .diagnostic-list {
+      display: grid;
+      gap: 28px;
+      margin-top: 42px;
+    }
+
+    .diagnostic-item {
+      display: grid;
+      grid-template-columns: 70px 1fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .diagnostic-item .mini-icon {
+      margin: 0;
+      background: rgba(0, 0, 0, 0.15);
+    }
+
+    .diagnostic-item strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 1.18rem;
+      font-weight: 850;
+    }
+
+    .diagnostic-item span {
+      color: rgba(255, 255, 255, 0.78);
+    }
+
+    .why-copy {
+      padding: 58px 0 24px;
+    }
+
+    .progress-list {
+      display: grid;
+      gap: 24px;
+      margin: 34px 0;
+    }
+
+    .progress-row {
+      display: grid;
+      gap: 9px;
+    }
+
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      color: var(--ink);
+      font-weight: 800;
+    }
+
+    .progress-bar {
+      height: 7px;
+      background: #ececef;
+      overflow: hidden;
+    }
+
+    .progress-bar span {
+      display: block;
+      width: var(--value);
+      height: 100%;
+      background: var(--red);
+    }
+
+    .phone-row {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-top: 34px;
+    }
+
+    .phone-icon {
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 58px;
+      color: var(--white);
+      background: var(--red);
+      border-radius: 50%;
+      line-height: 1;
+    }
+
+    .phone-icon svg {
+      width: 25px;
+      height: 25px;
+      display: block;
+      stroke: currentColor;
+    }
+
+    .phone-row div span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 650;
+    }
+
+    .phone-row strong {
+      color: var(--black);
+      font-size: 1.5rem;
+      line-height: 1.1;
+      font-weight: 900;
+    }
+
+    .projects {
+      padding: 108px 0;
+      color: var(--white);
+      background:
+        linear-gradient(180deg, rgba(23, 23, 23, 0.96), rgba(23, 23, 23, 0.98)),
+        repeating-linear-gradient(135deg, transparent 0 20px, rgba(255, 255, 255, 0.05) 20px 21px);
+      overflow: hidden;
+    }
+
+    .projects .section-heading h2 {
+      color: var(--white);
+    }
+
+    .project-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .project-card {
+      min-height: 420px;
+      position: relative;
+      overflow: hidden;
+      background: #0d0d0d;
+    }
+
+    .project-card img {
+      width: 100%;
+      height: 100%;
+      min-height: 420px;
+      object-fit: cover;
+      transition: transform 700ms ease;
+    }
+
+    .project-card:hover img {
+      transform: scale(1.08);
+    }
+
+    .project-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 42%, rgba(0, 0, 0, 0.78));
+    }
+
+    .project-card div {
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      bottom: 22px;
+      z-index: 1;
+    }
+
+    .project-card strong {
+      display: block;
+      font-size: 1.35rem;
+      font-weight: 850;
+    }
+
+    .project-card span {
+      color: rgba(255, 255, 255, 0.74);
+    }
+
+    .capabilities {
+      padding: 116px 0;
+      overflow: hidden;
+      background: var(--white);
+    }
+
+    .capability-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(300px, 0.76fr);
+      gap: 70px;
+      align-items: center;
+    }
+
+    .capability-box {
+      padding: 42px 42px 34px;
+      border: 6px solid #eeeeef;
+      background: rgba(255, 255, 255, 0.88);
+    }
+
+    .faq-list {
+      margin-top: 34px;
+      border-top: 1px solid var(--line);
+    }
+
+    .faq-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: 76px;
+      border-bottom: 1px solid var(--line);
+      font-size: 1.05rem;
+      font-weight: 800;
+    }
+
+    .faq-item span:last-child {
+      color: var(--red);
+      font-size: 1.5rem;
+    }
+
+    .rating-card {
+      max-width: 340px;
+      margin-bottom: -56px;
+      margin-left: 42px;
+      padding: 26px;
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      border: 4px solid var(--red);
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .rating-card strong {
+      display: block;
+      margin-top: 8px;
+      font-size: 1.35rem;
+    }
+
+    .capability-image {
+      min-height: 560px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.12));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .capability-image img {
+      width: 100%;
+      height: 100%;
+      min-height: 560px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .quote-features {
+      display: grid;
+      grid-template-columns: minmax(300px, 0.9fr) minmax(0, 1.1fr);
+      align-items: stretch;
+      background: var(--black);
+    }
+
+    .quote-panel {
+      padding: clamp(34px, 5vw, 64px);
+      color: var(--white);
+      background:
+        linear-gradient(180deg, rgba(216, 38, 28, 0.9), rgba(216, 38, 28, 0.9));
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quote-bg-img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; opacity: 0.15; z-index: 0;
+    }
+
+    .quote-panel > *:not(.quote-bg-img) {
+      position: relative;
+      z-index: 1;
+    }
+
+    .quote-panel h2 {
+      color: var(--white);
+      font-size: clamp(2rem, 4vw, 3.35rem);
+      text-align: center;
+    }
+
+    .quote-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 26px;
+    }
+
+    .quote-form input,
+    .quote-form textarea {
+      width: 100%;
+      min-height: 58px;
+      padding: 0 18px;
+      border: 0;
+      border-radius: 0;
+      color: var(--ink);
+      background: var(--white);
+      outline: 2px solid transparent;
+    }
+
+    .quote-form textarea {
+      grid-column: 1 / -1;
+      min-height: 150px;
+      padding-top: 16px;
+      resize: vertical;
+    }
+
+    .quote-form input:focus,
+    .quote-form textarea:focus {
+      outline-color: rgba(0, 0, 0, 0.36);
+    }
+
+    .quote-form .btn {
+      grid-column: 1 / -1;
+      width: 100%;
+      margin-top: 4px;
+    }
+
+    .contact-dark {
+      padding: clamp(44px, 6vw, 78px);
+      color: var(--white);
+      background:
+        linear-gradient(90deg, rgba(23, 23, 23, 0.96), rgba(23, 23, 23, 0.9)),
+        repeating-linear-gradient(135deg, transparent 0 22px, rgba(255, 255, 255, 0.05) 22px 23px);
+    }
+
+    .contact-dark h2 {
+      color: var(--white);
+      max-width: 680px;
+    }
+
+    .feature-list {
+      display: grid;
+      gap: 26px;
+      margin-top: 42px;
+    }
+
+    .feature-item {
+      display: grid;
+      grid-template-columns: 74px 1fr;
+      gap: 24px;
+      align-items: start;
+      padding-bottom: 26px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .feature-item:last-child {
+      border-bottom: 0;
+    }
+
+    .feature-item .mini-icon {
+      margin: 0;
+      background: var(--red);
+    }
+
+    .feature-item strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--white);
+      font-size: 1.18rem;
+    }
+
+    .feature-item span {
+      color: rgba(255, 255, 255, 0.67);
+    }
+
+    .testimonials {
+      padding: 112px 0;
+      background: var(--white);
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .testimonial-card {
+      position: relative;
+      background: var(--white);
+      border: 1px solid var(--line);
+      box-shadow: 0 24px 72px rgba(16, 17, 20, 0.08);
+    }
+
+    .testimonial-card {
+      padding: 34px;
+      min-height: 280px;
+    }
+
+    .testimonial-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto auto 0;
+      width: 140px;
+      height: 140px;
+      background: linear-gradient(135deg, var(--red) 0 49%, transparent 50%);
+      z-index: 0;
+    }
+
+    .reviewer {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .avatar {
+      width: 76px;
+      height: 76px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 76px;
+      border: 4px solid var(--white);
+      border-radius: 50%;
+      color: var(--white);
+      background: var(--black);
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.12);
+      font-size: 1.4rem;
+      font-weight: 900;
+    }
+
+    .reviewer strong {
+      display: block;
+      font-size: 1.2rem;
+    }
+
+    .reviewer span,
+    .testimonial-card p {
+      color: var(--muted);
+    }
+
+    .stars {
+      color: #f2b541;
+      margin-bottom: 18px;
+      letter-spacing: 0.12em;
+    }
+
+    .cta-band {
+      color: var(--white);
+      background: var(--red);
+    }
+
+    .cta-inner {
+      width: min(calc(100% - 40px), var(--max));
+      min-height: 160px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .cta-inner h2 {
+      margin: 0;
+      color: var(--white);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+    }
+
+    .footer {
+      padding: 76px 0 34px;
+      color: rgba(255, 255, 255, 0.66);
+      background:
+        linear-gradient(180deg, rgba(23, 23, 23, 0.97), rgba(23, 23, 23, 0.99)),
+        repeating-radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 18px);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.8fr 0.9fr;
+      gap: 58px;
+      margin-bottom: 58px;
+    }
+
+    .footer h3 {
+      margin-bottom: 20px;
+      color: var(--white);
+      font-size: 1.35rem;
+    }
+
+    .footer .brand {
+      margin-bottom: 24px;
+      color: var(--white);
+    }
+
+    .footer-links {
+      display: grid;
+      gap: 12px;
+    }
+
+    .footer-links a:hover {
+      color: var(--white);
+    }
+
+    .footer-contact {
+      display: grid;
+      gap: 14px;
+    }
+
+    .copyright {
+      padding-top: 28px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      text-align: center;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 760ms ease, transform 760ms ease;
+      transition-delay: var(--delay, 0ms);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes heroDrift {
+      from {
+        transform: scale(1.04) translate3d(-0.4%, -0.3%, 0);
+      }
+
+      to {
+        transform: scale(1.1) translate3d(0.8%, 0.4%, 0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    @media (max-width: 1040px) {
+      .nav {
+        grid-template-columns: auto auto;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 86px;
+        left: 20px;
+        right: 20px;
+        display: grid;
+        justify-content: stretch;
+        gap: 0;
+        padding: 14px;
+        background: var(--white);
+        box-shadow: var(--shadow);
+        transform: translateY(-16px);
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .nav-links.is-open {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .nav-links a {
+        padding: 16px 14px;
+      }
+
+      .nav-links a::after {
+        bottom: 10px;
+      }
+
+      .nav-cta {
+        display: none;
+      }
+
+      .hero-inner,
+      .split,
+      .diagnostic-grid,
+      .capability-grid,
+      .quote-features {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-inner {
+        align-items: end;
+      }
+
+      .hero-stats {
+        max-width: 620px;
+      }
+
+      .service-grid,
+      .stats-grid,
+      .project-strip,
+      .testimonial-grid,
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .about-art {
+        min-height: 520px;
+      }
+
+      .contact-dark {
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .section-inner,
+      .cta-inner {
+        width: auto;
+        margin-left: 16px;
+        margin-right: 16px;
+      }
+
+      .nav {
+        min-height: 76px;
+      }
+
+      .brand {
+        font-size: 1.25rem;
+      }
+
+      .nav-links {
+        top: 76px;
+        left: 16px;
+        right: 16px;
+      }
+
+      .hero {
+        min-height: 100svh;
+        padding-top: 76px;
+      }
+
+      .hero-inner {
+        min-height: calc(100svh - 76px);
+        padding: 78px 0 36px;
+      }
+
+      h1 {
+        font-size: clamp(2.3rem, 11vw, 3.15rem);
+      }
+
+      .hero-copy {
+        max-width: 34ch;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .hero-stats,
+      .service-grid,
+      .stats-grid,
+      .project-strip,
+      .testimonial-grid,
+      .footer-grid,
+      .quote-form,
+      .cta-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .services,
+      .about,
+      .capabilities,
+      .testimonials,
+      .projects {
+        padding: 78px 0;
+      }
+
+      .diagnostic {
+        padding-bottom: 78px;
+      }
+
+      .about-art {
+        min-height: 430px;
+      }
+
+      .about-main-img {
+        inset: 0 70px 86px 0;
+      }
+
+      .about-small-img {
+        width: 64%;
+        height: 48%;
+      }
+
+      .about-art::before {
+        right: 10px;
+        width: 150px;
+        height: 190px;
+      }
+
+      .diagnostic-grid,
+      .split,
+      .capability-grid {
+        gap: 42px;
+      }
+
+      .diagnostic-item,
+      .feature-item {
+        grid-template-columns: 54px 1fr;
+        gap: 16px;
+      }
+
+      .mini-icon {
+        width: 54px;
+        height: 54px;
+        font-size: 1.45rem;
+      }
+
+      .rating-card {
+        max-width: none;
+        margin: 0 0 18px;
+      }
+
+      .capability-image,
+      .project-card,
+      .project-card img {
+        min-height: 330px;
+      }
+
+      .quote-panel,
+      .contact-dark,
+      .capability-box,
+      .testimonial-card {
+        padding: 28px;
+      }
+
+      .cta-inner {
+        padding: 34px 0;
+      }
+    }
+  </style>
+<!-- Privacy-friendly analytics by Plausible -->
+<script async src="https://plausible.io/js/pa-UQmVLlXPuzFf5lyCftlC7.js"></script>
+<script>
+  window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+  plausible.init()
+</script>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav section-inner" aria-label="Hlavná navigácia">
+      <a class="brand" href="#home" aria-label="R-SERVICE domov">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>R-SERVICE</span>
+      </a>
+      <div class="nav-links" id="navLinks">
+        
+        <a href="#home">Domov</a><a href="#services">Autoservis</a><a href="#about">Pneuservis</a><a href="#projects">Pneumatiky</a><a href="#contact">Kontakt</a>
+      </div>
+      <a class="nav-cta" href="#contact">Zavolajte nám</a>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Otvoriť menu" aria-expanded="false"></button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home" aria-label="Úvod">
+      <div class="hero-media" aria-hidden="true">
+        <img src="hero.jpg" alt="" />
+      </div>
+      <div class="section-inner hero-inner">
+        <div class="hero-content">
+          <p class="kicker reveal">Od roku 2003</p>
+          <h1 class="reveal" style="--delay: 80ms">Kvalitný servis pre váš automobil</h1>
+          <p class="hero-copy reveal" style="--delay: 160ms">Komplexný autoservis a pneuservis s dôrazom na kvalitu. Opravy, diagnostika, pneumatiky a náhradné diely s rýchlym dodaním.</p>
+          <div class="hero-actions reveal" style="--delay: 240ms">
+            <a class="btn btn-primary" href="#contact">Objednať sa na servis</a>
+            <a class="btn btn-light" href="#services">Zistiť viac</a>
+          </div>
+        </div>
+        <div class="hero-stats reveal" style="--delay: 320ms" aria-label="Prehľad servisu">
+          <div class="hero-stat"><strong>2003</strong><span>Rok založenia</span></div><div class="hero-stat"><strong>Shell partner</strong><span>Kvalitné oleje</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="services" id="services">
+      <div class="section-inner">
+        <div class="section-heading">
+          <p class="kicker reveal">Naše služby</p>
+          <h2 class="reveal" style="--delay: 80ms">Komplexná starostlivosť o vozidlo</h2>
+          <p class="lead reveal" style="--delay: 160ms">Vykonávame mechanické práce, diagnostiku, výmenu olejov a prípravu na STK. Ponúkame aj predaj pneumatík a alu diskov.</p>
+        </div>
+
+        <div class="service-grid">
+          
+          
+          <article class="service-card reveal" style="--delay: 80ms">
+            <img class="service-bg-img" src="service1.jpg" alt="Autoservis a opravy" />
+            <h3>Autoservis a opravy</h3>
+            <p>Mechanické opravy, výmena rozvodu, generálka motora, opravy brzdovej sústavy a zavesenia.</p>
+          </article>
+          
+          
+          
+          <article class="service-card reveal" style="--delay: 160ms">
+            <img class="service-bg-img" src="service2.jpg" alt="Diagnostika a elektrika" />
+            <h3>Diagnostika a elektrika</h3>
+            <p>Komplexná diagnostika motorov, bezpečnostných systémov, klimatizácie a oprava autoelektriky.</p>
+          </article>
+          
+          
+          
+          <article class="service-card reveal" style="--delay: 240ms">
+            <img class="service-bg-img" src="service3.jpg" alt="Pneuservis a pneumatiky" />
+            <h3>Pneuservis a pneumatiky</h3>
+            <p>Predaj a servis pneumatík pre osobné autá, SUV a off-road. Výmena a skladovanie.</p>
+          </article>
+          
+          
+          
+          <article class="service-card is-red reveal" style="--delay: 320ms">
+            
+            <h3>Náhradné diely a oleje</h3>
+            <p>Rýchle dodanie dielov do 24 hodín. Široký výber olejov TOTAL, CASTROL a originálnych značiek.</p>
+          </article>
+          
+          
+        </div>
+      </div>
+    </section>
+
+    <section class="about" id="about">
+      <div class="section-inner split">
+        <div class="about-art reveal">
+          <div class="about-main-img">
+            <img src="aboutMain.jpg" alt="R-SERVICE: Odbornosť a dôvera" />
+          </div>
+          <div class="about-small-img">
+            <img src="aboutSmall.jpg" alt="R-SERVICE: Odbornosť a dôvera" />
+          </div>
+        </div>
+        <div class="about-copy">
+          <p class="kicker reveal">O firme</p>
+          <h2 class="reveal" style="--delay: 80ms">R-SERVICE: Odbornosť a dôvera</h2>
+          <p class="accent-line reveal" style="--delay: 160ms">Kvalita za rozumnú cenu</p>
+          <p class="lead reveal" style="--delay: 220ms">Firma vznikla v roku 2003 s cieľom ponúknuť motoristom spoľahlivý servis. Neustále sa vzdelávame, aby sme reagovali na inovácie v automobilovom trhu.</p>
+          <ul class="check-list reveal" style="--delay: 300ms">
+            <li>Servisné a záručné prehliadky pre nové vozidlá</li><li>Vysoká odbornosť a osobitý prístup</li><li>Rýchle dodanie náhradných dielov</li>
+          </ul>
+          <a class="btn btn-primary reveal" style="--delay: 380ms" href="#contact">Kontaktujte nás</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats" aria-label="Čísla servisu">
+      <div class="section-inner stats-grid">
+        
+        <div class="stat-card reveal" style="--delay: 0ms">
+          <div>
+            <strong>20+</strong>
+            <span>Rokov skúseností</span>
+          </div>
+        </div>
+        
+        <div class="stat-card reveal" style="--delay: 80ms">
+          <div>
+            <strong>100%</strong>
+            <span>Kvalita služieb</span>
+          </div>
+        </div>
+        
+        <div class="stat-card reveal" style="--delay: 160ms">
+          <div>
+            <strong>24h</strong>
+            <span>Dodanie dielov</span>
+          </div>
+        </div>
+        
+        <div class="stat-card reveal" style="--delay: 240ms">
+          <div>
+            <strong>Shell</strong>
+            <span>Partner</span>
+          </div>
+        </div>
+        
+      </div>
+    </section>
+
+    <section class="diagnostic">
+      <div class="section-inner diagnostic-grid">
+        <div class="diagnostic-panel reveal">
+          <h2>Diagnostika a údržba</h2>
+          <div class="diagnostic-list">
+            
+            
+            <div class="diagnostic-item">
+              <span class="mini-icon" aria-hidden="true">1</span>
+              <div>
+                <strong>Komplexná kontrola</strong>
+                <span>Diagnostika riadenia motora, bezpečnostných systémov, AIR BAG, ASR, ESP a klimatizácie.</span>
+              </div>
+            </div>
+            
+            
+            
+            <div class="diagnostic-item">
+              <span class="mini-icon" aria-hidden="true">2</span>
+              <div>
+                <strong>Mechanické práce</strong>
+                <span>Opravy častí riadenia, pruženia, brzdovej sústavy a výfukovej sústavy.</span>
+              </div>
+            </div>
+            
+            
+            
+            <div class="diagnostic-item">
+              <span class="mini-icon" aria-hidden="true">3</span>
+              <div>
+                <strong>Príprava na STK</strong>
+                <span>Úspešná príprava vozidla na technickú a emisnú kontrolu.</span>
+              </div>
+            </div>
+            
+            
+          </div>
+        </div>
+        <div class="why-copy">
+          <p class="kicker reveal">Prečo my</p>
+          <h2 class="reveal" style="--delay: 80ms">Dôvera zákazníkov</h2>
+          <p class="lead reveal" style="--delay: 160ms">Nechceme byť najlacnejší, ale preferujeme kvalitu, ktorá vám ušetrí čas a peniaze v dlhodobom horizonte.</p>
+          <div class="progress-list reveal" style="--delay: 240ms">
+            
+            <div class="progress-row">
+              <div class="progress-label"><span>Záručné prehliadky</span><span>Áno</span></div>
+              <div class="progress-bar"><span style="--value: Áno"></span></div>
+            </div>
+            
+            <div class="progress-row">
+              <div class="progress-label"><span>Rýchlosť servisu</span><span>Pohotová</span></div>
+              <div class="progress-bar"><span style="--value: Pohotová"></span></div>
+            </div>
+            
+          </div>
+          
+          <div class="phone-row reveal" style="--delay: 320ms">
+            <span class="phone-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.35 1.89.66 2.78a2 2 0 0 1-.45 2.11L8.09 9.84a16 16 0 0 0 6.07 6.07l1.23-1.23a2 2 0 0 1 2.11-.45c.89.31 1.82.53 2.78.66A2 2 0 0 1 22 16.92Z"></path>
+              </svg>
+            </span>
+            <div>
+              <span>Nonstop linka</span>
+              <strong>0915 832 193</strong>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+    <section class="projects" id="projects">
+      <div class="section-inner">
+        <div class="section-heading">
+          <p class="kicker reveal">Realizácie</p>
+          <h2 class="reveal" style="--delay: 80ms">Naše práce</h2>
+        </div>
+        <div class="project-strip">
+          
+          
+          <article class="project-card reveal" style="--delay: 0ms">
+            <img src="project1.jpg" alt="Servisné prehliadky" />
+            <div>
+              <strong>Servisné prehliadky</strong>
+              <span>Pre nové vozidlá v záruke</span>
+            </div>
+          </article>
+          
+          
+          
+          <article class="project-card reveal" style="--delay: 80ms">
+            <img src="project2.jpg" alt="Generálka motora" />
+            <div>
+              <strong>Generálka motora</strong>
+              <span>Kompletné opravy a výmena rozvodu</span>
+            </div>
+          </article>
+          
+          
+          
+          <article class="project-card reveal" style="--delay: 160ms">
+            <img src="project3.jpg" alt="Výmena pneumatík" />
+            <div>
+              <strong>Výmena pneumatík</strong>
+              <span>Pre osobné autá a SUV</span>
+            </div>
+          </article>
+          
+          
+        </div>
+      </div>
+    </section>
+
+    <section class="capabilities">
+      <div class="section-inner capability-grid">
+        <div class="capability-box reveal">
+          <p class="kicker">Špecializácie</p>
+          <h2>Čo ponúkame</h2>
+          <p class="lead">Predajca pneumatík VRANÍK s výhodnými rabatmi. Široký sortiment náhradných dielov a olejov.</p>
+          <div class="faq-list">
+            <div class="faq-item"><span>Vykonávame záručné prehliadky pre nové vozidlá?</span><span>→</span></div><div class="faq-item"><span>Máte k dispozícii pneumatiky pre off-road?</span><span>→</span></div><div class="faq-item"><span>Aká je dodacia lehota pre náhradné diely?</span><span>→</span></div>
+          </div>
+        </div>
+        <div class="reveal" style="--delay: 120ms">
+          
+          <div class="rating-card">
+            <div class="stars">★★★★★</div>
+            <strong>★★★★★</strong>
+          </div>
+          
+          <div class="capability-image" role="img" aria-label="Čo ponúkame">
+            <img src="capabilityBg.jpg" alt="Čo ponúkame" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="quote-features" id="contact">
+      <div class="quote-panel">
+        <img class="quote-bg-img" src="quoteBg.jpg" alt="" aria-hidden="true" />
+        <h2 class="reveal">Kontaktujte nás</h2>
+        <form class="quote-form reveal" style="--delay: 100ms">
+          <input type="text" name="name" placeholder="Meno" aria-label="Meno" />
+          <input type="tel" name="phone" placeholder="Telefón" aria-label="Telefón" />
+          <input type="email" name="email" placeholder="Email" aria-label="Email" />
+          <input type="text" name="vehicle" placeholder="Značka a model auta" aria-label="Značka a model auta" />
+          <textarea name="message" placeholder="Popíšte problém alebo požadovaný servis" aria-label="Popíšte problém alebo požadovaný servis"></textarea>
+          <button class="btn btn-dark" type="submit">Odoslať požiadavku</button>
+        </form>
+      </div>
+      <div class="contact-dark">
+        <p class="kicker reveal">Otváracie hodiny</p>
+        <h2 class="reveal" style="--delay: 80ms">Navštívte nás v Veľkom Krtíši</h2>
+        <p class="lead reveal" style="--delay: 160ms">Tešíme sa na vašu návštevu. Ponúkame výhodné rabaty pri nákupe pneumatík.</p>
+        <div class="feature-list">
+          
+          
+          <div class="feature-item reveal" style="--delay: 240ms">
+            <span class="mini-icon" aria-hidden="true">✓</span>
+            <div>
+              <strong>Otváracie hodiny</strong>
+              <span>Po - Pi: 9:00 - 16:00</span>
+            </div>
+          </div>
+          
+          
+          
+          <div class="feature-item reveal" style="--delay: 320ms">
+            <span class="mini-icon" aria-hidden="true">✓</span>
+            <div>
+              <strong>Kontakt</strong>
+              <span>Tel: 0915 832 193, 0918 936 002</span>
+            </div>
+          </div>
+          
+          
+        </div>
+      </div>
+    </section>
+
+    <section class="testimonials">
+      <div class="section-inner">
+        <div class="section-heading">
+          <p class="kicker reveal">Referencie</p>
+          <h2 class="reveal" style="--delay: 80ms">Čo hovoria zákazníci</h2>
+        </div>
+        <div class="testimonial-grid">
+          
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="cta-inner">
+        <h2>Potrebujete servis?</h2>
+        <a class="btn btn-light" href="#contact">Zavolajte nám</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="section-inner">
+      <div class="footer-grid">
+        <div>
+          <a class="brand" href="#home">
+            <span class="brand-mark" aria-hidden="true"></span>
+            <span>R-SERVICE</span>
+          </a>
+          <p>Autoservis a pneuservis s dôrazom na kvalitu a rýchlosť.</p>
+        </div>
+        <div>
+          <h3>Menu</h3>
+          <div class="footer-links">
+            
+            <a href="#services">Autoservis</a><a href="#about">Pneuservis</a><a href="#projects">Pneumatiky</a><a href="#contact">Kontakt</a>
+          </div>
+        </div>
+        <div>
+          <h3>Kontakt</h3>
+          <div class="footer-contact">
+            <span>Písecká 3, 990 01 Veľký Krtíš</span>
+            <a href="mailto:r-service@azet.sk">r-service@azet.sk</a>
+            <a href="tel:0915 832 193">0915 832 193</a>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">© 2024 R-SERVICE. Všetky práva vyhradené.</div>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("is-open");
+      menuToggle.classList.toggle("is-open", isOpen);
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      document.body.classList.toggle("is-locked", isOpen);
+    });
+
+    navLinks.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("is-open");
+        menuToggle.classList.remove("is-open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        document.body.classList.remove("is-locked");
+      });
+    });
+
+    document.querySelector(".quote-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+    });
+
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+    );
+
+    document.querySelectorAll(".reveal").forEach((element) => {
+      revealObserver.observe(element);
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+<script>
+  // Scroll depth
+  let scrollMarks = [25, 50, 75, 100];
+  window.addEventListener('scroll', () => {
+    const docHeight = document.body.scrollHeight - window.innerHeight;
+    if (docHeight <= 0) return;
+    const pct = (window.scrollY / docHeight) * 100;
+    scrollMarks = scrollMarks.filter(mark => {
+      if (pct >= mark) { plausible('Scroll', { props: { depth: mark + '%' } }); return false; }
+      return true;
+    });
+  });
+  // Time milestones
+  setTimeout(() => plausible('Time30s'), 30000);
+  setTimeout(() => plausible('Time60s'), 60000);
+  setTimeout(() => plausible('Time120s'), 120000);
+  // Clicks
+  document.querySelectorAll('a[href^="tel:"]').forEach(el =>
+    el.addEventListener('click', () => plausible('PhoneClick')));
+  document.querySelectorAll('a[href^="mailto:"]').forEach(el =>
+    el.addEventListener('click', () => plausible('EmailClick')));
+</script>
+
+<!-- Sticky CTA Banner -->
+<div id="cta-banner" style="position:fixed;bottom:-110px;left:50%;transform:translateX(-50%);z-index:9999;transition:bottom .5s cubic-bezier(.34,1.56,.64,1);background:#fff;color:#111;padding:14px 14px 14px 22px;border-radius:999px;display:flex;align-items:center;gap:12px;box-shadow:0 8px 40px rgba(0,0,0,.18);white-space:nowrap;border:1.5px solid #e5e7eb;">
+  <p style="margin:0;font-size:.85rem;font-weight:700;">Páči sa mi to</p>
+  <a id="cta-btn" href="#" style="background:#111;color:#fff;padding:9px 18px;border-radius:999px;font-weight:700;font-size:.78rem;text-decoration:none;display:inline-block;cursor:pointer;">Ozvite sa mi</a>
+  <button onclick="document.getElementById('cta-banner').style.bottom='-110px'" style="background:none;border:none;color:#9ca3af;cursor:pointer;font-size:1.3rem;padding:0 4px;line-height:1;font-family:sans-serif;">×</button>
+</div>
+<script>
+(function(){
+  var shown=false;
+  function showBanner(){if(shown)return;shown=true;document.getElementById('cta-banner').style.bottom='24px';}
+  setTimeout(showBanner,20000);
+  window.addEventListener('scroll',function(){
+    var d=document.body.scrollHeight-window.innerHeight;
+    if(d>0&&(window.scrollY/d)*100>=50)showBanner();
+  },{passive:true});
+  document.getElementById('cta-btn').addEventListener('click',function(e){
+    e.preventDefault();
+    plausible('BannerCTA');
+    var b=document.getElementById('cta-banner');
+    b.style.transition='bottom .5s cubic-bezier(.34,1.56,.64,1), opacity .3s ease';
+    b.style.opacity='0';
+    setTimeout(function(){
+      b.innerHTML='<p style="margin:0;font-size:.85rem;font-weight:700;padding:4px 12px;">ďakujeme, budeme Vás kontaktovať 😊</p>';
+      b.style.opacity='1';
+      setTimeout(function(){b.style.bottom='-110px';},3500);
+    },300);
+  });
+})();
+</script>
+</body>
+</html>
