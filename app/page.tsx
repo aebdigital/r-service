@@ -356,7 +356,7 @@ export default function Home() {
               </div>
 
               <div className="capability-image" role="img" aria-label="Čo ponúkame">
-                <img src="/legacy/r-service-final.png" alt="R-SERVICE" />
+                <img src="/legacy/shell_logo.jpg" alt="Shell Partner" />
               </div>
             </div>
           </div>
