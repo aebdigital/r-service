@@ -2,8 +2,8 @@
 @tailwind utilities;
 
     :root {
-      --red: #a2bb4e;
-      --red-dark: #a2bb4e;
+      --red: #9ABD40;
+      --red-dark: #9ABD40;
       --black: #171717;
       --ink: #24252b;
       --muted: #6d717c;
@@ -69,9 +69,37 @@
     .nav {
       min-height: 86px;
       display: grid;
-      grid-template-columns: auto 1fr auto;
+      grid-template-columns: auto 1fr auto auto;
       gap: 24px;
       align-items: center;
+    }
+
+    .nav-towing {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 1px;
+      text-decoration: none;
+      transition: opacity 180ms ease;
+    }
+
+    .nav-towing:hover {
+      opacity: 0.75;
+    }
+
+    .nav-towing-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+    }
+
+    .nav-towing-number {
+      font-size: 1.05rem;
+      font-weight: 850;
+      color: var(--red);
+      letter-spacing: 0.01em;
     }
 
     .brand {
@@ -182,14 +210,14 @@
     .btn-primary {
       color: var(--white);
       background: var(--red);
-      box-shadow: 0 16px 36px rgba(162, 187, 78, 0.24);
+      box-shadow: 0 16px 36px rgba(154, 189, 64, 0.24);
     }
 
     .nav-cta:hover,
     .btn-primary:hover {
       background: var(--red-dark);
       transform: translateY(-2px);
-      box-shadow: 0 20px 46px rgba(162, 187, 78, 0.3);
+      box-shadow: 0 20px 46px rgba(154, 189, 64, 0.3);
     }
 
     .btn-dark {
@@ -300,7 +328,7 @@
       z-index: 2;
       pointer-events: none;
       background:
-        radial-gradient(circle at 4% 88%, rgba(162, 187, 78, 0.22), transparent 24%),
+        radial-gradient(circle at 4% 88%, rgba(154, 189, 64, 0.22), transparent 24%),
         repeating-linear-gradient(135deg, transparent 0 18px, rgba(255, 255, 255, 0.035) 18px 19px);
       mask-image: linear-gradient(90deg, #000 0 42%, transparent 70%);
     }
@@ -427,86 +455,71 @@
 
     .service-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 18px;
     }
 
-    .service-grid.is-five {
-      grid-template-columns: repeat(5, 1fr);
-    }
-
     .service-card {
-      min-height: 330px;
-      position: relative;
-      display: grid;
-      align-content: end;
-      padding: 26px;
+      display: flex;
+      flex-direction: column;
       overflow: hidden;
       color: var(--white);
-      background: var(--black);
+      background: var(--ink);
       box-shadow: var(--shadow);
+      transition: transform 220ms ease, box-shadow 220ms ease;
     }
 
-    .service-card::before {
-      display: none;
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 32px 80px rgba(16, 17, 20, 0.22);
+    }
+
+    .service-card-thumb {
+      height: 165px;
+      overflow: hidden;
+      flex-shrink: 0;
     }
 
     .service-bg-img {
-      position: absolute; inset: 0; width: 100%; height: 100%;
-      object-fit: cover; opacity: 0.72; transform: scale(1.04);
-      transition: transform 700ms ease, opacity 700ms ease; z-index: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transform: scale(1.05);
+      transition: transform 700ms ease;
     }
 
-    .service-card:hover .service-bg-img { opacity: 0.88; transform: scale(1.11); }
-
-    .service-card::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.74)),
-        linear-gradient(135deg, rgba(162, 187, 78, 0.24), transparent 58%);
+    .service-card:hover .service-bg-img {
+      transform: scale(1.12);
     }
 
-    .service-card.is-red {
+    .service-card-body {
+      flex: 1;
+      padding: 20px 22px 24px;
+      border-top: 2px solid var(--red);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .service-card.is-red .service-card-body {
+      border-top-color: rgba(255, 255, 255, 0.35);
       background: var(--red);
-    }
-
-    .service-card.is-red::after {
-      background:
-        repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0 1px, transparent 1px 12px),
-        linear-gradient(135deg, rgba(0, 0, 0, 0.08), transparent);
-    }
-
-    .service-card > * {
-      position: relative;
-      z-index: 1;
-    }
-
-    .mini-icon {
-      width: 72px;
-      height: 72px;
-      display: grid;
-      place-items: center;
-      margin-bottom: 26px;
-      color: var(--white);
-      background: var(--red);
-      border: 1px solid rgba(255, 255, 255, 0.22);
-      font-size: 2rem;
-      line-height: 1;
     }
 
     .service-card h3 {
-      margin-bottom: 12px;
+      margin: 0;
       color: var(--white);
-      font-size: 1.55rem;
-      line-height: 1.1;
+      font-size: 1rem;
+      line-height: 1.2;
       font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
     }
 
     .service-card p {
-      margin-bottom: 0;
-      color: rgba(255, 255, 255, 0.78);
+      margin: 0;
+      color: rgba(255, 255, 255, 0.67);
+      font-size: 0.82rem;
+      line-height: 1.55;
     }
 
     .about {
@@ -938,7 +951,7 @@
       padding: clamp(34px, 5vw, 64px);
       color: var(--white);
       background:
-        linear-gradient(180deg, rgba(162, 187, 78, 0.9), rgba(162, 187, 78, 0.9));
+        linear-gradient(180deg, rgba(154, 189, 64, 0.9), rgba(154, 189, 64, 0.9));
       position: relative;
       overflow: hidden;
     }
@@ -1127,8 +1140,8 @@
       min-height: 160px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 32px;
+      grid-template-columns: 1fr auto auto;
+      gap: 40px;
       align-items: center;
     }
 
@@ -1136,6 +1149,36 @@
       margin: 0;
       color: var(--white);
       font-size: clamp(2rem, 4vw, 3.2rem);
+    }
+
+    .cta-towing {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      text-decoration: none;
+      padding: 12px 20px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transition: background 180ms ease;
+    }
+
+    .cta-towing:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .cta-towing-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .cta-towing-number {
+      font-size: 1.3rem;
+      font-weight: 850;
+      color: var(--white);
+      letter-spacing: 0.01em;
     }
 
     .footer {
@@ -1220,7 +1263,7 @@
       inset: 0;
       pointer-events: none;
       background:
-        radial-gradient(circle at 8% 86%, rgba(162, 187, 78, 0.24), transparent 26%),
+        radial-gradient(circle at 8% 86%, rgba(154, 189, 64, 0.24), transparent 26%),
         repeating-linear-gradient(135deg, transparent 0 18px, rgba(255, 255, 255, 0.035) 18px 19px);
       mask-image: linear-gradient(90deg, #000 0 48%, transparent 78%);
     }
@@ -1309,7 +1352,7 @@
     .sidebar-link.is-active {
       padding-left: 24px;
       color: var(--black);
-      background: rgba(162, 187, 78, 0.14);
+      background: rgba(154, 189, 64, 0.14);
     }
 
     .content-panel {
@@ -1429,7 +1472,7 @@
     .pill-list span {
       padding: 10px 14px;
       color: var(--black);
-      background: rgba(162, 187, 78, 0.18);
+      background: rgba(154, 189, 64, 0.18);
       font-weight: 850;
     }
 
@@ -1620,7 +1663,8 @@
         bottom: 10px;
       }
 
-      .nav-cta {
+      .nav-cta,
+      .nav-towing {
         display: none;
       }
 
@@ -1642,7 +1686,6 @@
       }
 
       .service-grid,
-      .service-grid.is-five,
       .stats-grid,
       .project-strip,
       .testimonial-grid,
@@ -1727,7 +1770,6 @@
 
       .hero-stats,
       .service-grid,
-      .service-grid.is-five,
       .stats-grid,
       .project-strip,
       .testimonial-grid,
@@ -1824,6 +1866,13 @@
 
       .cta-inner {
         padding: 34px 0;
+        grid-template-columns: 1fr;
+        justify-items: start;
+        gap: 20px;
+      }
+
+      .cta-towing {
+        align-items: flex-start;
       }
 
       .copyright {

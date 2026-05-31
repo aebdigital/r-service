@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { mainNavItems } from "../content";
+import { mainNavItems, contact } from "../content";
 
 export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -42,6 +42,13 @@ export function SiteHeader() {
             );
           })}
         </div>
+        <a
+          className="nav-towing"
+          href={`tel:${contact.towing.number.replaceAll(" ", "")}`}
+        >
+          <span className="nav-towing-label">{contact.towing.label}</span>
+          <span className="nav-towing-number">{contact.towing.number}</span>
+        </a>
         <Link className="nav-cta" href="/kontakt">
           Kontakt
         </Link>

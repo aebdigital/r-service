@@ -26,6 +26,12 @@ export default function ContactPage() {
                 {phone}
               </a>
             ))}
+            <a
+              className="btn btn-primary"
+              href={`tel:${contact.towing.number.replaceAll(" ", "")}`}
+            >
+              {contact.towing.label}: {contact.towing.number}
+            </a>
             <a className="btn btn-dark" href={`mailto:${contact.email}`}>
               {contact.email}
             </a>

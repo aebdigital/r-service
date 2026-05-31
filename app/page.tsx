@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { Footer } from "./components/Footer";
 import { RevealObserver } from "./components/RevealObserver";
 import { SiteHeader } from "./components/SiteHeader";
-import { contact, servicePages } from "./content";
+import { contact, homeCards, servicePages } from "./content";
 
 type CSSVars = CSSProperties & Record<`--${string}`, string>;
 
@@ -62,6 +62,12 @@ const projects = [
     image: "/project3.jpg",
     delay: 160,
   },
+  {
+    title: "Tuning",
+    text: "Softvérová úprava výkonu motora pre maximálny výkon a efektivitu.",
+    image: "/tuning.jpg",
+    delay: 240,
+  },
 ];
 
 const features = [
@@ -85,19 +91,6 @@ function track(event: string, props?: Record<string, string>) {
   plausible?.(event, props ? { props } : undefined);
 }
 
-function phoneIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      strokeWidth="2.4"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.35 1.89.66 2.78a2 2 0 0 1-.45 2.11L8.09 9.84a16 16 0 0 0 6.07 6.07l1.23-1.23a2 2 0 0 1 2.11-.45c.89.31 1.82.53 2.78.66A2 2 0 0 1 22 16.92Z" />
-    </svg>
-  );
-}
 
 export default function Home() {
   useEffect(() => {
@@ -185,22 +178,25 @@ export default function Home() {
                 Komplexná starostlivosť o vozidlo
               </h2>
               <p className="lead reveal" style={delay(160)}>
-                Päť hlavných služieb z pôvodného webu sme rozšírili do samostatných stránok
-                s kompletným textom a obrázkami.
+                Komplexný servis, predaj a odborné poradenstvo pre váš automobil na jednom mieste.
               </p>
             </div>
 
-            <div className="service-grid is-five">
-              {servicePages.map((service, index) => (
+            <div className="service-grid">
+              {homeCards.map((card, index) => (
                 <Link
-                  key={service.slug}
-                  className={`service-card reveal${service.slug === "nahradne-diely" ? " is-red" : ""}`}
-                  href={service.href}
-                  style={delay((index + 1) * 70)}
+                  key={card.slug}
+                  className={`service-card reveal${card.slug === "nahradne-diely" ? " is-red" : ""}`}
+                  href={card.href}
+                  style={delay((index + 1) * 60)}
                 >
-                  <img className="service-bg-img" src={service.cardImage} alt={service.title} />
-                  <h3>{service.title}</h3>
-                  <p>{service.summary}</p>
+                  <div className="service-card-thumb">
+                    <img className="service-bg-img" src={card.cardImage} alt={card.title} />
+                  </div>
+                  <div className="service-card-body">
+                    <h3>{card.title}</h3>
+                    <p>{card.summary}</p>
+                  </div>
                 </Link>
               ))}
             </div>
@@ -295,15 +291,6 @@ export default function Home() {
                 ))}
               </div>
 
-              <div className="phone-row reveal" style={delay(320)}>
-                <span className="phone-icon" aria-hidden="true">
-                  {phoneIcon()}
-                </span>
-                <div>
-                  <span>Nonstop linka</span>
-                  <strong>{contact.phones[0]}</strong>
-                </div>
-              </div>
             </div>
           </div>
         </section>
@@ -413,6 +400,13 @@ export default function Home() {
         <section className="cta-band">
           <div className="cta-inner">
             <h2>Potrebujete servis?</h2>
+            <a
+              className="cta-towing"
+              href={`tel:${contact.towing.number.replaceAll(" ", "")}`}
+            >
+              <span className="cta-towing-label">{contact.towing.label}</span>
+              <span className="cta-towing-number">{contact.towing.number}</span>
+            </a>
             <Link className="btn btn-light" href="/kontakt">
               Zavolajte nám
             </Link>

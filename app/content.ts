@@ -78,7 +78,7 @@ export const servicePages = [
     navLabel: "Pneumatiky",
     href: "/sluzby/pneumatiky",
     summary:
-      "Predaj nových a jazdených pneumatík pre osobné vozidlá, SUV, ľahké úžitkové vozidlá a off-road.",
+      "Predaj všetkých značiek pneumatík dostupných na Slovensku. TPMS ventily.",
     cardImage: "/legacy/pneumatiky.jpg",
     heroImage: "/legacy/pneumatiky.jpg",
     paragraphs: [
@@ -94,7 +94,7 @@ export const servicePages = [
     navLabel: "Alu disky",
     href: "/sluzby/alu-disky",
     summary:
-      "Ponuka hliníkových diskov s prehľadným katalógom na stiahnutie.",
+      "Predaj certifikovaných hliníkových diskov.",
     cardImage: "/legacy/alu_disk.jpg",
     heroImage: "/legacy/alu_disk.jpg",
     paragraphs: [
@@ -117,7 +117,7 @@ export const servicePages = [
       "Krátka dodacia lehota pre nás znamená dodanie dielu ešte v ten deň alebo maximálne do 24 hodín.",
       "Na sklade disponujeme širokým sortimentom k bežnej údržbe. Vyrábame vlastné brzdové potrubia a zabezpečíme aj originálne náhradné diely všetkých značiek predávaných na slovenskom trhu.",
       "Naším základným sortimentom sú oleje TOTAL, CASTROL, ale aj originálne oleje automobiliek BMW, FORD, GM (OPEL), DAEWOO a CHEVROLET.",
-      "Stali sme sa Shell partner.",
+      "Stali sme sa certifikovaným Shell partnerom.",
     ],
     parts: [
       {
@@ -186,6 +186,18 @@ export const servicePages = [
 
 export type ServicePage = (typeof servicePages)[number];
 
+export const homeCards = [
+  { slug: "autoservis",   title: "Autoservis",               href: "/sluzby/autoservis",   summary: "Servisné prehliadky, výmena oleja, mechanické práce, opravy motora, diagnostika, autoelektrika a príprava na STK a EK.", cardImage: "/legacy/autoservis.jpg" },
+  { slug: "pneuservis",   title: "Pneuservis",               href: "/sluzby/pneuservis",   summary: "Kompletný pneuservis — montáž, vyváženie, oprava defektu, programovanie TPMS senzorov.", cardImage: "/legacy/pneuservis.jpg" },
+  { slug: "pneumatiky",   title: "Pneumatiky",               href: "/sluzby/pneumatiky",   summary: "Predaj všetkých značiek pneumatík dostupných na Slovensku. TPMS ventily.", cardImage: "/tires.jpg" },
+  { slug: "alu-disky",    title: "Alu disky",                href: "/sluzby/alu-disky",    summary: "Predaj certifikovaných hliníkových diskov.", cardImage: "/legacy/alu_disk.jpg" },
+  { slug: "nahradne-diely", title: "Náhradné diely",         href: "/sluzby/nahradne-diely", summary: "Náhradné diely pre všetky svetové značky — dodanie v ten deň alebo do 24 hodín.", cardImage: "/legacy/parts/motor.jpg" },
+  { slug: "klimatizacie", title: "Klimatizácie",             href: "/kontakt",             summary: "Plnenie, servis a údržba klimatizácií. Chladivá R134a aj R1234yf.", cardImage: "/legacy/parts/klima.jpg" },
+  { slug: "prevodovky",   title: "Automatické prevodovky",   href: "/kontakt",             summary: "Výmena oleja strojom, statická a dynamická výmena, preplach prevodovky.", cardImage: "/legacy/parts/pohon.jpg" },
+  { slug: "diagnostika-tuning", title: "Diagnostika & Tuning", href: "/kontakt",           summary: "Optimalizácia motora, zvýšenie výkonu, úprava softvéru, podtáčanie v automatickej prevodovke.", cardImage: "/tuning.jpg" },
+  { slug: "geometria",    title: "Geometria",                href: "/kontakt",             summary: "Disponujeme najnovším zariadením na nastavenie geometrie kolies na trhu.", cardImage: "/legacy/servisak.jpg" },
+];
+
 export const companyPages = [
   {
     slug: "profil-firmy",
@@ -223,6 +235,7 @@ export const contact = {
   address: ["R-SERVICE", "Písecká 3", "Veľký Krtíš", "990 01"],
   billing: ["Roman Štrbík R-SERVICE", "Obeckov 73", "991 05 Sklabiná"],
   phones: ["0915 832 193", "0918 936 002"],
+  towing: { label: "Odťahová služba", number: "0908 191 382" },
   email: "r-service@azet.sk",
   companyId: "40 445 585",
   taxId: "1048704206",
